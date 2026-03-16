@@ -1,0 +1,813 @@
+# Python Class
+
+Python + OOP
+
+Django/Flask
+
+REST APIs
+
+SQL (PostgreSQL/MySQL)
+
+Frontend (React)
+
+Git
+
+Basic AWS
+
+## What is python
+- Python is a programming language , which helps to communicate with th hardware components of the computer.
+## why Python
+- Its simple to undertand (Readibility)
+- High level language - 
+- Simple to learn 
+- high level programming language
+- Interpreted language.
+- Dynamically Types.
+
+
+
+## Levels of languages
+- High (python , its like human langue)
+    - No nned to worry about  memory 
+    - pointer
+    - Hardware details
+- low (machine level language - binary languagge (0,1))
+- Medium (c is good exam - having set of rules and , you can directly communicate with hardware , manipulatling the memory object , int , float )
+
+## General- puropse of python
+- Web sites
+- AI/ ML - chat bots , agents, 
+- Data science - 
+- Automation
+- Testing 
+- Game Development . ( C++)
+
+## Compiled vs intrepted
+- C -> complie -> the run  - after compilation we will get to know the error - if the error is at the end of the code - this will fails 
+- If there is error at end - the whole code will execute and stops at the error line.
+    - Python runs line by line using an intrepreter.
+
+# What the market demand for python developers and whats the different pathways
+- High demand 
+- Django , Fastapi, Some devops concept
+
+
+
+# Basics of python
+### Variables
+- varable = a container that stores data
+
+
+### Datatypes :
+- int
+- float 
+- str
+- bool 
+
+Exmaple :
+- product name : string : str
+- price : float
+-  qunatity : int
+- payment status : True / False  - boolean
+
+
+```python
+product_name = "laptop"
+price  =  23.75 # float
+qunatity = 2 #int
+is_paid = True # bool
+
+print("Product:" , product_name)
+print("price ", price )
+print("qunatity ", qunatity )
+print("is_paid" ,is_paid)
+
+total_amount =  price*quantity
+
+print("total amount :",total_amount)
+```
+
+#### Task
+
+```
+name = "Your Name"
+age = 22
+height = 5.8
+is_student = True
+
+print(name, age, height, is_student)
+```
+
+```https://www.python.org/downloads/```
+
+## Taking inputs and Type conversion
+### What is input ?
+- `input()` allows the program to take data from the users.
+- by default input is always stored as a **string**
+
+```python
+
+age = input("Enter the age : ")
+print(type(age)) #class 'str'
+
+# for year - 365
+# age * 365
+```
+
+### Type Conversion
+
+
+| **Function** | **Converts to** |
+| -------------| ----------|
+| int() | integer|
+| float() | decimal|
+| str() | string |
+| bool() | boolean |
+
+### Operators
+
+> Operator = symbol that perform an action
+
+```
+5 + 3
+```
+
+`+` is the operator  
+`5` and `3` are operands
+
+|Operator	|Meaning	| Example|
+| ----- | ---- | ---- |
+|+	|Addition	|a + b
+|- |	Subtraction |	a - b
+|*	|Multiplication	|a * b
+|/	|Division	| a / b
+|//	|Floor division |	a // b
+|% | 	Modulus	|a % b
+|**	|Power	|a ** b
+
+
+```python
+price = 499
+quantity = 3
+
+total = price * quantity
+discount = total * 0.10
+final_amount = total - discount
+
+print("Total:", total)
+print("Discount:", discount)
+print("Final Amount:", final_amount)
+```
+
+## Comparison Operators
+| Operator | Meaning          |
+| -------- | ---------------- |
+| ==       | equal            |
+| !=       | not equal        |
+| >        | greater than     |
+| <        | less than        |
+| >=       | greater or equal |
+| <=       | less or equal    |
+
+
+``` python
+entered_pin = 1234
+actual_pin = 1234
+
+print("PIN Match:", entered_pin == actual_pin)
+print("PIN Wrong:", entered_pin != actual_pin)
+
+```
+
+## Logical operators
+| Operator | Meaning           |
+| -------- | ----------------- |
+| and      | both must be true |
+| or       | at least one true |
+| not      | reverses result   |
+
+
+### Day 3 Task :
+- Problem: Restaurant Bill Generator
+
+```
+**Take from user:**
+customer name
+food price
+quantity
+tax = 5%
+
+**Calculate:**
+total
+tax amount
+final bill
+```
+
+
+# Day 4
+
+## Conditional Statements (if - else)
+
+- Conditioinal statements allows python to execute code based on a condition.
+
+```python
+ 
+if <condition>:
+    # do this for me (code runs if condition is true)
+else :
+    # code runs  - if  condiotion false
+
+```
+
+```python
+
+# if balance >= withdrawl amount -> allow the operation
+# else : tells  notify the user regarding the issue.
+
+if connection success:
+    do some progress - the operation (deposit , withdraw, balance check etc.)
+else :
+    prit("atm out of service")
+
+```
+
+> https://github.com/thonny/thonny/releases/tag/v4.1.7
+
+### Task on if - else 
+>we have to check the eligibility to vote  for the user
+> - user  should have age at least 18 or above 
+> - we hav to take the input from the user .
+> - take user name from the user an dnotify the user with their name 
+>- name : tarun - and age is 18 means you have print "tarun you are eligible to vote" esle  "tarun your are not eligible to vote" 
+
+#### Solution
+```python
+
+#we have to take the input from the user .
+age = int(input("Enter your age : "))
+
+#user should have age at least 18 or above
+#PEP 8 - standards for python programming
+
+if age >= 18:
+    print("User is eligible to vote")
+else :
+    print("user is not eligible to vote")
+
+```
+
+### if -elif - else  (Multiple conditions)
+- used when there are many choices
+
+``` python
+## this is Syntax
+if condition1:
+    pass
+elif  condition2:
+    pass
+elif condtion3:
+    pass
+else:
+    pass
+
+```
+
+#### Coding Example:
+>1. take marks from the user
+>2. if marks is greater than or equal to 90 -> print Grade A
+>3. if marks is greater than or equal to 75 -> print Grade B
+>4. if marks is greater than or equal to 50 -> print Grade c
+
+```python 
+marks = int(input("Enter your marks :"))
+
+if marks >= 90 :
+    print("Grade :A")
+elif marks >= 75 :
+    print("Grade :B")
+elif marks >=50 :
+    print("Grade :C")
+else :
+    print("Fail")
+
+```
+
+#### task : 
+> take number the user and print odd even number
+
+> take two number and print nthe largest number 
+
+## TOPICS 5 LOOPS
+- Loops allows  us to `repeat a block of code multiple times`
+Intead of writing the same code again and again , we use loops
+
+### Types of loops in python:
+1. for loop
+2. while loop
+
+
+```python 
+for <variable> in  range(number):
+    #code
+```
+
+### For loop inside for loop (nested for loop)
+
+
+
+
+- our aim is to print 5 numbers from 0
+
+
+
+### Lists 
+
+- list is a container **that stores multiple values in one varaible**
+Eg: A**Shopping cart** stores many items.
+
+``` python
+
+fruits = ["Apple","Banana","Mango"]
+
+print(fruits)
+## each item seperated by commas
+```
+
+## accessing Items
+
+Each item ha  s position (index)
+
+``` python
+fruits = ["Apple", "Banana", "Mango"]
+
+fruits[1] = "Orange"
+
+print(fruits)
+
+```
+
+### Adding Items
+
+``` python
+fruits = ["Apple", "Banana"]
+
+fruits.append("Mango")
+
+print(fruits)
+```
+
+append() → adds item to list.
+
+```python
+cart = []
+
+cart.append("Laptop")
+cart.append("Mouse")
+cart.append("Keyboard")
+
+print(cart)
+
+```
+
+
+### tasks
+- Create a list of 3 favorite movies and print them.
+- Create a list of 5 numbers and print the first number.
+- Create an empty list and add 3 fruits using append().
+
+## Strings
+
+- Text inside **quotes** is called a string.
+> "hello"
+> 'hello'
+
+### String Index
+
+```python
+name = "Python"
+
+print(name) # Python
+print(name[0]) # P
+print(name[1]) # y
+print(name[-1])
+```
+### String Slicing 
+
+```python
+text = "python"
+print(text[0:3])  #Pyt
+```
+
+### String Funcrtions
+
+
+```python
+text = "python"
+print(text.upper())  # PYTHON
+```
+
+
+```python
+text = "PYTHON"
+print(text.lower())  # python
+```
+
+
+### length of string
+
+```python
+text = "PYTHON"
+print(len(text))  # 6
+```
+
+#### Example:
+```python
+usename = input("Enter user name : ")
+
+if username == "tarun":
+    print("access Granted ")
+else :
+    print("Access denied")
+
+```
+## While Loop 
+- (for loop will excute the task based on the range :)
+- A **While loop repeates code** while a condition is True
+
+```python
+while condition:
+    #code to execute
+```
+
+### Simple Example
+- print numbers from 1 to 5
+```python
+password = input(" Enter the password : ")
+
+my_password = "Tarun"
+
+while password !=  my_password:
+    password = input(" your password is incorrect please  Enter the correct password : ")
+    
+print(" user verification successful")
+
+
+```
+
+```python
+password = input(" Enter the password : ")
+
+my_password = "Tarun"
+count = 0
+
+while password !=  my_password and count < 2:
+    password = input(" your password is incorrect please  Enter the correct password : ")
+    count = count + 1
+
+if count >=2 :
+    print("please try after some time")
+else:
+    print(" user verification successful")
+```
+```python
+#print( 1 to 5 using while loop)
+number = 1
+
+while number <=5 :
+    #code
+    print(number)
+    number+=1   # number = number +1
+    
+    
+    
+### 5 4 3 2 1
+```
+## Do -while concept
+- Do while loop executes the code at least once before checking the condition
+
+```python
+# Do while 
+Run Code
+|
+Check condition
+|
+Repeat
+```
+
+```
+Check condition
+|if above condition is true
+Run the code 
+|
+Repeat
+```
+
+```
+do 
+{
+    print("hello")
+} while(condition)
+```
+
+```python
+while True :
+    num = int(input("enter a number greater than 10 : "))
+
+    if num >10:
+        break
+
+# loop runs first
+# condition checked later
+# break stops the loop - 
+```
+---------------------------------
+|Feature | While loop |  do-while|
+--------|-------------|------------
+|Condition check | before loop | After loop|
+|Runs at least once| no |Yes|
+
+## Dictionaries in Python
+- A dictonary stores data in key-value pairs.
+
+```Python
+Name -> tarun
+Age  -> 25
+City -> Banglore
+```
+
+```python
+student = {"name":"tarun", "age":25,"city":"Banglore","phone_number":995122222} :XX
+```
+
+```python
+
+student = {
+    "name":"tarun",
+    "age":25,
+    "city" : "Banglore",
+    "phone _number" : 99232323223
+    }
+```
+
+```
+{ }
+key - > value 
+
+```
+
+```python
+print(student)
+
+#o/p : {'name':'tarun', 'age':25,'city':'Banglore','phone_number':995122222} 
+```
+
+### How to access elements in dictonary
+
+```python
+print(dictonary_name['key'])
+```
+
+```python
+
+student = {
+    "name":"tarun",
+    "age":25,
+    "city" : "Banglore",
+    "phone _number" : 99232323223
+    }
+
+print(student['age'])
+
+
+for key in student:
+    print("key : "+key)
+    print("value : " + str(student[key]))
+    print( "_"*10)
+```
+
+## How to change values for a key in the dictonary
+
+```python
+
+student = {
+    "name":"tarun",
+    "age":25,
+    "city" : "Banglore",
+    "phone _number" : 99232323223
+    }
+
+print(student)
+
+student["name"] = "Teja"
+
+print(student)
+
+student["age"] = 23
+print(student)
+```
+
+### How to add elements in the dictonary
+```python
+
+student = {
+    "name":"tarun",
+    "age":25,
+    "city" : "Banglore",
+    "phone _number" : 99232323223
+    }
+
+print(student)
+
+student["name"] = "Teja"
+
+print(student)
+
+student["age"] = 23
+print(student)
+
+### add data to the dictonary
+student["address"] = "Andhra"
+
+print(student)
+
+
+### Add list to the key
+student["address"] = ['Vizag','Andhra',533333]
+```
+### how to delete data in the dictonary
+
+```python
+
+student = {
+    "name":"tarun",
+    "age":25,
+    "city" : "Banglore",
+    "phone _number" : 99232323223
+    }
+student.pop("address")
+
+print(student)
+
+```
+
+## Nested loops
+
+
+```python
+list_students = [
+    ['tarun',20,'ECE'],
+    ['balakrishna',21,'cse'],
+    ['indresh',21,'EEE'],
+    ['Karthik',22,'AI']
+]
+
+
+for student in list_students :
+    for item in student:
+        print(item)
+    print('_'*10)
+
+```
+```
+*
+**
+***
+****
+*****
+```
+
+```
+****
+****
+****
+****
+```
+
+
+```
+*
+**
+***
+****
+*****
+****
+***
+**
+*
+```
+
+```
+1
+12
+1234
+12345
+123456
+```
+
+```python
+"""
+1
+12
+123
+1234
+12345
+123456
+"""
+
+
+#print('1')
+#print('1 2')
+#print('1 2 3 ')
+#print('1 2 3 4')
+
+number = 4
+
+for i in range(1,number + 1):           
+    for j in range(1,i + 1):			
+        print(j ,end = " ")
+    print("")
+     
+```
+
+```
+111
+222
+333
+```
+
+## Functions 
+- A function is a block of code that performs a specific task.
+- we call function whenever we need it.
+
+### Basic Syntax of a function
+
+```python
+def greet():
+    print("Hello Students")
+```
+
+```python
+## example for naming 
+def add():
+    return  a+b
+
+```
+
+| Keyword | Meaning|
+|---------|--------|
+|def | defines a function|
+|greet | function name|
+|( )| parameters|
+
+> The function runs only when we call it
+
+#### Function with parameters
+
+```python
+#machine  needs to greet with the user name 
+# machine to prepare a coffee based on the options the user choose
+
+# cold , hot , mild , hard , strong , light 
+
+
+def coffee_machine(coffee_type,quantity):
+    instruction = coffee_type
+    print(quantity + " " + coffee_type + " Coffeee is ready ")
+    
+
+coffee_machine("cold","200ml")
+
+```
+### Functions with Return Value
+
+- Function can return results
+
+
+```python 
+def coffee_machine(coffee_type,quantity):
+    instruction = coffee_type
+    print(quantity + " " + coffee_type + " Coffeee is ready ")
+    return "coffee"
+
+#cup = coffee_machine("cold","200ml")
+
+
+#print(cup)
+
+#print("sugar " + cup)
+
+
+def add(num1,num2):
+    result = num1 + num2
+    return result
+
+
+res = add(1,1)
+print(res) #2
+
+
+res2 = add(res,1)
+print(res2) #3
+```
+
+- `return` sends the resukt back
