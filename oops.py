@@ -39,3 +39,5 @@ for char in stri:
     if stri.count(char) == 1:
         print(char)
         break
+    
+#Count vowels and consonants in a string

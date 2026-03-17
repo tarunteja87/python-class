@@ -811,3 +811,83 @@ print(res2) #3
 ```
 
 - `return` sends the resukt back
+
+## File Handiling in Python
+
+- File handing allows python program to create , read , write , and update files.
+
+- Example : invoice , logs , reports , configrations
+
+
+___
+
+- we use    `open()` function function .
+
+
+```python
+
+file_content = open('test.txt','r')
+
+```
+
+| Mode | Meanings|
+|---|-----|
+|r| read file|
+|w| write file|
+|a| append data
+|x | create new file|
+____
+
+### read
+```python
+###########  READ ##############
+
+file = open("test.txt", "r")  # open the file in read mode.
+
+content = file.read()  # read the content of the file.
+
+print(content)  # print the content of the file.
+
+file.close()  # This is the important step when you use open function
+```
+
+### Write
+```python
+################ Write ###################
+
+file = open("test.txt", "w")
+
+
+file.write(" hello students this is writing from the code")
+
+
+file.close()
+```
+
+### Append
+
+```python
+###### Append #######
+
+file = open("test.txt", "a")
+
+file.write("\nthis is appended text ")
+
+file.close()
+```
+
+### Create
+
+```python
+file = open("text.txt","w")
+
+file.write("hello this is the file created using open function in python")
+
+file.close()
+```
+
+
+
+#### Task
+- take inputs from user : Name , age , height , weight  and calculate BMI 
+- Generate a report (report.txt ) file should contains - name , age , height , weight and BMI
