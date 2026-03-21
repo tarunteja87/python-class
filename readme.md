@@ -891,3 +891,129 @@ file.close()
 #### Task
 - take inputs from user : Name , age , height , weight  and calculate BMI 
 - Generate a report (report.txt ) file should contains - name , age , height , weight and BMI
+
+
+## Exception Handling
+### what is exception handling?
+Exception Handling is used to handle errors without crashing the program.
+
+
+```python
+number = int(input("Enter the number : "))
+
+print(10/number)
+
+print("this is some more program to run.")
+```
+### Specific Exceptions :
+
+```python
+
+try :
+    print(10/number)
+except ZeroDivisionError:
+    print("Cannot divide by zero")
+except :
+    print("this is unknown error")
+
+print("this is some more program to run.")
+```
+### Else and finally
+
+```python
+number = int(input("Enter the number : "))
+
+try :
+    print(10/number)
+    
+except ZeroDivisionError:
+    print("Cannot divide by zero")
+except :
+    print("this is unknown error")
+
+else : 
+    print("there are no errors found")
+    
+finally:
+    print("finally always works")
+    
+    
+print("this is some more program to run.")
+
+```
+## OOPS
+Oops is a way of writing code using `objects` and `classes`.
+
+example :
+ Application form(template) - 
+
+ 1. you download the application form and you have fill. (copy)
+ 2. a
+
+- `class` is like a blueprint
+- `objects` is the copy of the blueprint( with or with out modifications)
+
+### Class and object
+- A `class` is a blueprint for creating an object. an `object` is an isntance of class - a real world entity behaviour (car can drive ) attributes(colour :white)
+
+- A `class` defines what kind of data and functions(methods) the object will have.
+- A `objcect` is a concrete thing created using the class defination.
+
+#### features
+- classes allow code resuablilty
+- multiple ojects can be made using the same class
+
+
+### Real time example
+```python
+### blueprint
+
+class Car:
+    def __init__(self,brand,model):
+        self.brand = brand   # attribute
+        self.model = model   # attribute
+
+    def drive(self):
+        print(f"{self.brand} {self.model} is driving.")
+
+
+
+### copies 
+
+car1 = Car("BMW","X7")
+car2 = Car("Audi","Q4")
+car3 = Car("TATA","Nexon")
+
+car1.drive()
+car2.drive()
+car3.drive()
+
+
+```
+
+- `__init__()` is a constructor that runs when an object is created.
+- `self` : refers to object being created.
+- car1,car2,car3 - Objects(instance.)
+
+#### Real-Time Implementation
+
+- class Driver -> name , rating, location
+- each object  will have different values.
+
+1. Explain the concept
+2. Real world world
+3. Code and explain
+4. Real time implementation
+5. When to use.
+6. where to use.
+7. how to memorize (interview
+8. shortcut to understand
+9. coding interview questions.)
+
+
+#### when to use
+- when you need to model `multiple similar objects`.
+- This is kind of organizing the code.
+
+#### memory tip :
+
