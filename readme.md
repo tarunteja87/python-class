@@ -893,8 +893,7 @@ file.close()
 - Generate a report (report.txt ) file should contains - name , age , height , weight and BMI
 
 
-## Exception Handling
-### what is exception handling?
+## Exception Handling\ what is exception handling?
 Exception Handling is used to handle errors without crashing the program.
 
 
@@ -1017,3 +1016,23 @@ car3.drive()
 
 #### memory tip :
 
+## `__init__` Method and `self` Keyword
+
+- `__init__` : A constructor method that is called automatically when a class object is created.
+- `self` : A reference  to the current instance of the class (used to access variables and methods)
+
+___
+- `__init__` sets up the object with default or passed -in values.
+- `self` is like `this object` . It allows object-specific data access inside the class.
+---
+- `__init__`is just on of the pythons "dunder" (double underscore method) 
+- `self` must always be the first argument in any instance method
+
+---
+- [❌] Topic 3 : instamce variable vs class Variables.
+- [❌] Topic 4 : Types of Methods in Python Classes
+- [✅] Topic 5 : Encapsulation
+- [✅] Topic 6 : Inheritance 
+- [✅] Topic 7 : Polymorphism 
+- [✅] Topic 8 : Abstraction
+- [⚠️] Topic 11 : Solid principles
