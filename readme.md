@@ -1103,3 +1103,5 @@ print(teja_account.balance)
 
 print(teja_account.withdraw(9000))
 ```
+
+- Encapsulation : hidding data + controlling access to it

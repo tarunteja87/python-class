@@ -1,10 +1,13 @@
 
+password_database = {
+    'teja' : 'password'
+}
 
 class BankAccount:
     
     def __init__(self, holder, balance):
         self.holder = holder
-        self.balance = balance
+        self.__balance = balance
         
         
     def deposit(self, amount):
@@ -14,37 +17,38 @@ class BankAccount:
         return self.balance
     
     def withdraw(self,amount):
-        if amount < self.balance :
-            self.balance -=amount
-            print(f"{amount} withdraw successfully")
-            print(f"remaining balance{self.balance}")
-        else:
-            print("Insufficient balance")
+        self.password = input(f"Enter Password for {self.holder} :")
+        if self.__auth(self.holder,self.password,password_database):
+            if amount < self.get_balance() :
+                final_balance = self.get_balance() -amount
+                self.set_balance(final_balance)
+                print(f"{amount} withdraw successfully")
+                print(f"remaining balance{self.get_balance()}")
+            else:
+                print("Insufficient balance")
         
+    def __auth(self,name,password,database):
+        if database[name] == password:
+            print("Authentication Successsssss")
+            return True
+        print("Authentication Failed")
+        return False
+    
+    def set_balance(self,number):
+        self.__balance = number
         
-        
-tarun_account = BankAccount("tarun",15000000)
-
-print(f"account holder name : {tarun_account.holder}")
-print(f"account balance : {tarun_account.__balance}")
-
-tarun_account.deposit(100)
-
-print(f"account balance after deposit : {tarun_account.balance}")
-praveen_accont = BankAccount("praveen something ", 2)
-
-
-print(f"account holder name : {praveen_accont.holder}")
-print(f"account balance : {praveen_accont.balance}")
-
-
-print(f"account balance : {tarun_account.balance}")
+    def get_balance(self):
+        self.password = input(f"Enter Password for {self.holder} :")
+        if self.__auth(self.holder,self.password,password_database):
+            print(f"Balance is {self.__balance}")
+            return self.__balance
+        return None
 
 
 teja_account = BankAccount("teja",500000)
 
-teja_account.withdraw(20)
 
-print(teja_account.balance)
+teja_account.withdraw(5000)
+teja_account.get_balance()
 
-print(teja_account.withdraw(9000))
+    
