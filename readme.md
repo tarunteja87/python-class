@@ -1265,3 +1265,112 @@ Any programming language - Python ( basic core concepts + OOPs)
 
 - Digital protifolio ( html css and js )
 - Exhibiting the skills in social media (LN)
+
+
+
+## Abstraction
+- Abstraction is the oops concept of `hiding complex implementation details` and showing only the `essential features` of an object.
+
+- abstraction will let you `focus on what an object does`, not how it does.
+
+- in python Abstraction can be achieved through :
+ - `Abstract Base Classes (ABC)`
+
+
+- it forces child class to `implement cretain methods` , making your code `standardized and consistent`
+
+
+Eg : TV remote - press the button on/off -> on/ off the TV ->
+
+- do you know how it works ? - do you think about signals and inner codes or the funcationality wheather its on or off ?
+
+
+- car you know how to drive a car - but do you really think of which cylinder is moving fast - how heat is transfered. we just think of driving on the road not how engines internally works ?
+
+- ATM - we think of withdraw - not how system is going to dispatch the logic
+
+
+> Users sees WHAT to do , not HOW it works internally.
+
+
+
+```Python 
+
+
+class Car:
+    def start(self):
+        print("car is started")
+        
+    def drive(self):
+        print("Car is moving")
+        
+        
+my_car = Car()
+
+
+#my_car.start()
+#my_car.drive()
+
+
+#simple abstraction 
+
+from abc import ABC, abstractmethod
+
+# area of circle - pi * r ** 2
+# area of rectangle 
+# area of square    -  
+# area of triangle   - 0.5 * base * height 
+
+
+
+## parent class
+class Shape(ABC):
+    
+    
+    # area is declared but not implemented
+    # hi developers i want everyone to use this area for all the shapes youa re creating ( graphis - needs area all the time - )
+    @abstractmethod
+    def area(self):
+        pass
+    
+    
+class Circle(Shape):
+    
+    def area(self):
+        return "area"
+    
+    def summary(Self):
+        print("this is the summary")
+
+
+circle1  = Circle()
+
+circle1.summary()
+    
+
+```
+
+
+### When to use 
+- when multiple classes shares the same interfaces but different in behaviour
+
+
+
+
+## modules and packages 
+
+### What is module ?
+- A Module is just a file that contains python code
+
+eg: You have a library -> contains books 
+    python module      -> contains lines of code 
+    tool box           -> tools
+    Folder contains    -> files
+
+same in python - we split code into modules  -> to keep the things clean and resuable.
+
+- A module is a `.py` file containing variables, functions , or classes 
+
+
+#### packages 
+A package is a folder containing multiple modules
