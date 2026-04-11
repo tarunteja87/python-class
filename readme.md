@@ -1105,3 +1105,163 @@ print(teja_account.withdraw(9000))
 ```
 
 - Encapsulation : hidding data + controlling access to it
+
+
+## Inheritance 
+- Inheritance allows a class (child)  to `inherit properties and methods` from another class(parents), to promote `code resuability`
+
+- A child class is a `specilized version of a parent class`
+
+- A child class automatically gets the parenst's:
+    - Variable (attributes)
+    - Function (methods)
+
+
+```python
+
+## Parent class
+
+class Animal :
+    def __init__(self,name):
+        self.name = name
+        
+    def speak(self):
+        print(f"{self.name} makes a sound")
+        
+    
+    
+# Child class 
+
+class Dog(Animal) :
+    pass
+        
+        
+
+class Cat(Animal) :
+    pass
+        
+        
+        
+dog = Dog("max")
+
+print(dog.speak())
+
+cat = Cat("melow")
+
+
+print(cat.speak())
+
+
+```
+
+
+```Python
+"""
+## Parent class
+
+class Animal :
+    def __init__(self,name):
+        self.name = name
+        
+    def speak(self):
+        print(f"{self.name} makes a sound")
+        
+    
+    
+# Child class 
+
+class Dog(Animal) :
+    pass
+        
+        
+
+class Cat(Animal) :
+    pass
+        
+        
+        
+dog = Dog("max")
+
+print(dog.speak())
+
+cat = Cat("melow")
+
+
+print(cat.speak())
+"""
+
+class User :
+    def __init__(self,name):
+        self.name = name
+
+    
+    def login(self):
+        print(f"{self.name} logged in")
+        
+
+# Drive
+class Drive(User):
+    
+    def navigate(self):
+        print(f"{self.name} is navigating to the location")
+
+# Rider
+class Rider(User):
+    
+    def request_ride(self):
+        print(f"{self.name} is requesting a ride.")
+        
+        
+Driver1 = Drive("tarun")
+Rider1  = Rider("teja")
+
+
+Driver1.login()
+
+
+Rider1.login()
+
+Rider1.request_ride()
+
+Driver1.navigate()
+
+```
+
+### when to use 
+
+- when multiple classess shares `common functionalities`.
+- to extend a class for `specific behaviour`.
+- To implements `DRY` (Don't Repeat yourself)
+
+
+### where to use
+- Game dev : - Base character - > enemy , player 
+- webdevelopment - Base -> admin, employee 
+
+
+> `Child copies parent`
+
+[❌] overriding 
+[❌] Multiple inheritance, multi level , single inheritance
+
+
+## Ploymorphism
+- Ploymorphism means `many forms` in OOP, it refers to the ability to use `the same method or operation in different ways` depending on the object.
+
+- ploymorphism allows functions / methods to `work differently` for different data types are classes
+
+
+----
+
+Any programming language - Python ( basic core concepts + OOPs)
+- django (frame work  for webdevelopment ) - application to show 
+- SQL
+
+- Appitude amd reasoning
+- Coding skills (Hacker Rank - low and medium level questions is enough till oops)  ❌ DSA
+- Communication skiils ( you have to tell the definations as it is , don't try to recreate the definations)
+
+- Interview preparation is must. 
+
+- Digital protifolio ( html css and js )
+- Exhibiting the skills in social media (LN)
