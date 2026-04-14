@@ -1,0 +1,4 @@
+**/Django/virtual-environment
+**/__pycache__/
+**/*.pyc
+

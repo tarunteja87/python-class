@@ -44,13 +44,28 @@ class User :
 class Drive(User):
     
     def navigate(self):
-        print(f"{self.name} is navigating to the location")
+        pass
 
 # Rider
 class Rider(User):
     
     def request_ride(self):
         print(f"{self.name} is requesting a ride.")
+        
+        
+class AndroidNav:
+    def androidnav(self):
+        print("this is android navigation")
+
+class IosNav:
+    print("this is android navigation")
+        
+class Navigation(Drive,AndroidNav,IosNav):
+    
+    
+    def navigation(Self):
+        pass
+        
         
         
 Driver1 = Drive("tarun")
