@@ -7,6 +7,13 @@
 </head>
 <body>
     <h1>This is home page from the templates folder</h1>
-    
+    <h2> User login page</h2>
+
+    {% if user_data.login_status == True %}
+        <h3>Welcome {{user_data.name}}</h3
+    {% else %}
+        <h3> Please login to view the page </h3>
+    {% endif %}
+
 </body>
 </html>

@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http  import HttpResponse
+import random
 
 # Create your views here.
 
@@ -9,12 +10,20 @@ from django.http  import HttpResponse
 ### Function - logic or code
 
 def home(request):
-    return  render(request,'home.html')
+    user_dict = {
+       'name': "Tarun",
+       'age' : 10,
+       'login_status' : False
+    }
+    
+    return  render(request,'home.html',{'user_data':user_dict})
 
 # About us 
 
 def About_us(request):
-    return render(request,'about-us.html')
+    randomnumber = random.randint(10,100)
+    
+    return render(request,'about-us.html',{'rand_num':randomnumber})
 
 # Work From Home
 def work_from_home(request):
