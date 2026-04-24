@@ -1,0 +1,28 @@
+# protifolio website 
+
+
+- Two showcase our profies in public
+
+## Contents
+
+- menu bar 
+
+Hero section
+
+- Contact information
+
+- personal information
+
+- Projects 
+
+- Skills
+
+- Education Qualifications
+
+- Certifications 
+
+- Achievements
+
+- Social Media
+
+footer

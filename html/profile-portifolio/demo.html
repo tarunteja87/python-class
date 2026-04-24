@@ -1,0 +1,1054 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Flexbox & Grid Interactive Demo</title>
+<style>
+  * { box-sizing: border-box; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(135deg, #1e1e2e 0%, #2a2a3e 100%);
+    color: #e0e0e0;
+    min-height: 100vh;
+  }
+
+  header {
+    text-align: center;
+    padding: 30px 20px;
+    background: rgba(0, 0, 0, 0.3);
+    border-bottom: 2px solid #6366f1;
+  }
+
+  header h1 {
+    margin: 0;
+    font-size: 2.2rem;
+    background: linear-gradient(90deg, #6366f1, #ec4899);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  header p {
+    color: #a0a0b0;
+    margin-top: 8px;
+  }
+
+  nav {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    padding: 15px;
+    background: rgba(0, 0, 0, 0.2);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+
+  nav button {
+    background: #2d2d44;
+    color: #e0e0e0;
+    border: 1px solid #444;
+    padding: 10px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: all 0.2s;
+  }
+
+  nav button:hover { background: #3d3d5c; }
+  nav button.active {
+    background: #6366f1;
+    border-color: #6366f1;
+  }
+
+  main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 30px 20px;
+  }
+
+  section {
+    display: none;
+    animation: fadeIn 0.4s ease;
+  }
+
+  section.active { display: block; }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .demo-card {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid #2d2d44;
+    border-radius: 12px;
+    padding: 25px;
+    margin-bottom: 25px;
+  }
+
+  .demo-card h2 {
+    margin-top: 0;
+    color: #a5b4fc;
+    border-bottom: 1px solid #2d2d44;
+    padding-bottom: 10px;
+  }
+
+  .demo-card h3 {
+    color: #f9a8d4;
+    margin-top: 20px;
+  }
+
+  .desc {
+    color: #b0b0c0;
+    line-height: 1.6;
+    margin-bottom: 15px;
+  }
+
+  .controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 15px;
+    padding: 15px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 8px;
+  }
+
+  .controls label {
+    display: flex;
+    flex-direction: column;
+    font-size: 0.85rem;
+    color: #c0c0d0;
+  }
+
+  .controls select,
+  .controls input {
+    margin-top: 4px;
+    padding: 6px 10px;
+    background: #1e1e2e;
+    color: #e0e0e0;
+    border: 1px solid #444;
+    border-radius: 4px;
+    font-size: 0.9rem;
+  }
+
+  .code-block {
+    background: #0f0f1a;
+    color: #a5b4fc;
+    padding: 15px;
+    border-radius: 6px;
+    font-family: "Monaco", "Consolas", monospace;
+    font-size: 0.85rem;
+    overflow-x: auto;
+    border-left: 3px solid #6366f1;
+    white-space: pre;
+    margin: 15px 0 0 0;
+    line-height: 1.5;
+  }
+
+  .code-block.html {
+    color: #fca5a5;
+    border-left-color: #ec4899;
+  }
+
+  .code-tabs {
+    display: flex;
+    gap: 4px;
+    margin-top: 15px;
+    margin-bottom: -1px;
+  }
+
+  .code-tab {
+    background: #1e1e2e;
+    color: #a0a0b0;
+    border: 1px solid #2d2d44;
+    border-bottom: none;
+    padding: 6px 14px;
+    border-radius: 6px 6px 0 0;
+    cursor: pointer;
+    font-size: 0.85rem;
+    font-family: inherit;
+  }
+
+  .code-tab.active {
+    background: #0f0f1a;
+    color: #e0e0e0;
+    border-color: #6366f1;
+  }
+
+  .code-panel { display: none; }
+  .code-panel.active { display: block; }
+
+  .code-group .code-block {
+    margin-top: 0;
+    border-radius: 0 6px 6px 6px;
+  }
+
+  .copy-btn {
+    float: right;
+    background: #2d2d44;
+    color: #a0a0b0;
+    border: 1px solid #444;
+    padding: 3px 10px;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    cursor: pointer;
+    font-family: inherit;
+  }
+  .copy-btn:hover { background: #3d3d5c; color: #fff; }
+
+  /* ========== FLEX DEMOS ========== */
+  .flex-container {
+    display: flex;
+    background: rgba(99, 102, 241, 0.1);
+    border: 2px dashed #6366f1;
+    border-radius: 8px;
+    padding: 15px;
+    min-height: 180px;
+    gap: 10px;
+    margin: 15px 0;
+    transition: all 0.3s;
+  }
+
+  .flex-item {
+    background: linear-gradient(135deg, #6366f1, #8b5cf6);
+    color: white;
+    padding: 20px;
+    border-radius: 6px;
+    font-weight: bold;
+    text-align: center;
+    min-width: 50px;
+    transition: all 0.3s;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  }
+
+  /* ========== GRID DEMOS ========== */
+  .grid-container {
+    display: grid;
+    background: rgba(236, 72, 153, 0.1);
+    border: 2px dashed #ec4899;
+    border-radius: 8px;
+    padding: 15px;
+    gap: 10px;
+    margin: 15px 0;
+    min-height: 200px;
+    transition: all 0.3s;
+  }
+
+  .grid-item {
+    background: linear-gradient(135deg, #ec4899, #f59e0b);
+    color: white;
+    padding: 20px;
+    border-radius: 6px;
+    font-weight: bold;
+    text-align: center;
+    transition: all 0.3s;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  }
+
+  .grid-named-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .header-area { background: linear-gradient(135deg, #3b82f6, #6366f1); grid-area: header; }
+  .sidebar-area { background: linear-gradient(135deg, #10b981, #059669); grid-area: sidebar; }
+  .main-area { background: linear-gradient(135deg, #f59e0b, #ef4444); grid-area: main; }
+  .footer-area { background: linear-gradient(135deg, #8b5cf6, #ec4899); grid-area: footer; }
+
+  .layout-grid {
+    display: grid;
+    grid-template-areas:
+      "header header header"
+      "sidebar main main"
+      "footer footer footer";
+    grid-template-columns: 1fr 2fr 1fr;
+    grid-template-rows: 60px 200px 60px;
+    gap: 10px;
+  }
+
+  footer {
+    text-align: center;
+    padding: 25px;
+    color: #808090;
+    border-top: 1px solid #2d2d44;
+    margin-top: 40px;
+  }
+
+  .tip {
+    background: rgba(245, 158, 11, 0.1);
+    border-left: 3px solid #f59e0b;
+    padding: 12px 15px;
+    border-radius: 4px;
+    margin: 15px 0;
+    font-size: 0.9rem;
+    color: #fde68a;
+  }
+
+  .card-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+  }
+
+  .gallery-card {
+    background: linear-gradient(135deg, #6366f1, #ec4899);
+    color: white;
+    padding: 30px 15px;
+    border-radius: 8px;
+    text-align: center;
+    font-weight: bold;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Flexbox & Grid Interactive Demo</h1>
+  <p>Play with the controls to see how properties change the layout in real time</p>
+</header>
+
+<nav>
+  <button class="tab-btn active" data-tab="flex">Flexbox</button>
+  <button class="tab-btn" data-tab="grid">CSS Grid</button>
+  <button class="tab-btn" data-tab="compare">Flex vs Grid</button>
+</nav>
+
+<main>
+
+  <!-- ============== FLEX SECTION ============== -->
+  <section id="flex" class="active">
+
+    <div class="demo-card">
+      <h2>Starter Template — copy this into an .html file</h2>
+      <p class="desc">
+        This is the base template used in every Flexbox example below. Save it as <code>flex.html</code>,
+        open it in your browser, and edit the CSS inside <code>&lt;style&gt;</code> to experiment.
+      </p>
+      <pre class="code-block html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+    .flex-container {
+      display: flex;            /* turns on flexbox */
+      gap: 10px;
+      padding: 15px;
+      border: 2px dashed #6366f1;
+      background: #eef2ff;
+    }
+
+    .flex-item {
+      background: #6366f1;
+      color: white;
+      padding: 20px;
+      border-radius: 6px;
+    }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+  &lt;div class="flex-container"&gt;
+    &lt;div class="flex-item"&gt;1&lt;/div&gt;
+    &lt;div class="flex-item"&gt;2&lt;/div&gt;
+    &lt;div class="flex-item"&gt;3&lt;/div&gt;
+  &lt;/div&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+      <div class="tip">
+        The <b>container</b> (parent div) gets <code>display: flex</code>. The <b>items</b> are the direct children.
+        Every example below changes a CSS property on one of them.
+      </div>
+    </div>
+
+    <div class="demo-card">
+      <h2>1. flex-direction</h2>
+      <p class="desc">Controls the main axis — the direction items flow inside the container.</p>
+      <div class="controls">
+        <label>flex-direction
+          <select id="fd-direction">
+            <option value="row">row (default)</option>
+            <option value="row-reverse">row-reverse</option>
+            <option value="column">column</option>
+            <option value="column-reverse">column-reverse</option>
+          </select>
+        </label>
+      </div>
+      <div class="flex-container" id="fd-container">
+        <div class="flex-item">1</div>
+        <div class="flex-item">2</div>
+        <div class="flex-item">3</div>
+        <div class="flex-item">4</div>
+      </div>
+      <div class="code-group">
+        <div class="code-tabs">
+          <button class="code-tab active" data-target="fd-html">HTML</button>
+          <button class="code-tab" data-target="fd-css">CSS</button>
+        </div>
+        <div class="code-panel active" id="fd-html">
+          <pre class="code-block html">&lt;div class="flex-container"&gt;
+  &lt;div class="flex-item"&gt;1&lt;/div&gt;
+  &lt;div class="flex-item"&gt;2&lt;/div&gt;
+  &lt;div class="flex-item"&gt;3&lt;/div&gt;
+  &lt;div class="flex-item"&gt;4&lt;/div&gt;
+&lt;/div&gt;</pre>
+        </div>
+        <div class="code-panel" id="fd-css">
+          <pre class="code-block" id="fd-code">.flex-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.flex-item {
+  background: #6366f1;
+  color: white;
+  padding: 20px;
+}</pre>
+        </div>
+      </div>
+    </div>
+
+    <div class="demo-card">
+      <h2>2. justify-content (main axis alignment)</h2>
+      <p class="desc">Aligns items along the main axis (horizontal in a row).</p>
+      <div class="controls">
+        <label>justify-content
+          <select id="jc-justify">
+            <option value="flex-start">flex-start</option>
+            <option value="flex-end">flex-end</option>
+            <option value="center">center</option>
+            <option value="space-between">space-between</option>
+            <option value="space-around">space-around</option>
+            <option value="space-evenly">space-evenly</option>
+          </select>
+        </label>
+      </div>
+      <div class="flex-container" id="jc-container">
+        <div class="flex-item">A</div>
+        <div class="flex-item">B</div>
+        <div class="flex-item">C</div>
+      </div>
+      <div class="code-group">
+        <div class="code-tabs">
+          <button class="code-tab active" data-target="jc-html">HTML</button>
+          <button class="code-tab" data-target="jc-css">CSS</button>
+        </div>
+        <div class="code-panel active" id="jc-html">
+          <pre class="code-block html">&lt;div class="flex-container"&gt;
+  &lt;div class="flex-item"&gt;A&lt;/div&gt;
+  &lt;div class="flex-item"&gt;B&lt;/div&gt;
+  &lt;div class="flex-item"&gt;C&lt;/div&gt;
+&lt;/div&gt;</pre>
+        </div>
+        <div class="code-panel" id="jc-css">
+          <pre class="code-block" id="jc-code">.flex-container {
+  display: flex;
+  justify-content: flex-start;
+}</pre>
+        </div>
+      </div>
+    </div>
+
+    <div class="demo-card">
+      <h2>3. align-items (cross axis alignment)</h2>
+      <p class="desc">Aligns items perpendicular to the main axis (vertical in a row).</p>
+      <div class="controls">
+        <label>align-items
+          <select id="ai-align">
+            <option value="stretch">stretch (default)</option>
+            <option value="flex-start">flex-start</option>
+            <option value="flex-end">flex-end</option>
+            <option value="center">center</option>
+            <option value="baseline">baseline</option>
+          </select>
+        </label>
+      </div>
+      <div class="flex-container" id="ai-container" style="height: 220px;">
+        <div class="flex-item" style="height: auto;">Short</div>
+        <div class="flex-item" style="padding: 40px 20px;">Tall</div>
+        <div class="flex-item" style="padding: 25px 20px; font-size: 1.3rem;">Medium</div>
+      </div>
+      <div class="code-group">
+        <div class="code-tabs">
+          <button class="code-tab active" data-target="ai-html">HTML</button>
+          <button class="code-tab" data-target="ai-css">CSS</button>
+        </div>
+        <div class="code-panel active" id="ai-html">
+          <pre class="code-block html">&lt;div class="flex-container"&gt;
+  &lt;div class="flex-item"&gt;Short&lt;/div&gt;
+  &lt;div class="flex-item tall"&gt;Tall&lt;/div&gt;
+  &lt;div class="flex-item medium"&gt;Medium&lt;/div&gt;
+&lt;/div&gt;</pre>
+        </div>
+        <div class="code-panel" id="ai-css">
+          <pre class="code-block" id="ai-code">.flex-container {
+  display: flex;
+  align-items: stretch;
+  height: 220px;
+}</pre>
+        </div>
+      </div>
+    </div>
+
+    <div class="demo-card">
+      <h2>4. flex-wrap</h2>
+      <p class="desc">Controls whether items wrap to a new line when there isn't enough room.</p>
+      <div class="controls">
+        <label>flex-wrap
+          <select id="fw-wrap">
+            <option value="nowrap">nowrap (default)</option>
+            <option value="wrap">wrap</option>
+            <option value="wrap-reverse">wrap-reverse</option>
+          </select>
+        </label>
+      </div>
+      <div class="flex-container" id="fw-container">
+        <div class="flex-item" style="min-width: 120px;">Item 1</div>
+        <div class="flex-item" style="min-width: 120px;">Item 2</div>
+        <div class="flex-item" style="min-width: 120px;">Item 3</div>
+        <div class="flex-item" style="min-width: 120px;">Item 4</div>
+        <div class="flex-item" style="min-width: 120px;">Item 5</div>
+        <div class="flex-item" style="min-width: 120px;">Item 6</div>
+      </div>
+      <div class="code-group">
+        <div class="code-tabs">
+          <button class="code-tab active" data-target="fw-html">HTML</button>
+          <button class="code-tab" data-target="fw-css">CSS</button>
+        </div>
+        <div class="code-panel active" id="fw-html">
+          <pre class="code-block html">&lt;div class="flex-container"&gt;
+  &lt;div class="flex-item"&gt;Item 1&lt;/div&gt;
+  &lt;div class="flex-item"&gt;Item 2&lt;/div&gt;
+  &lt;div class="flex-item"&gt;Item 3&lt;/div&gt;
+  &lt;div class="flex-item"&gt;Item 4&lt;/div&gt;
+  &lt;div class="flex-item"&gt;Item 5&lt;/div&gt;
+  &lt;div class="flex-item"&gt;Item 6&lt;/div&gt;
+&lt;/div&gt;</pre>
+        </div>
+        <div class="code-panel" id="fw-css">
+          <pre class="code-block" id="fw-code">.flex-container {
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.flex-item {
+  min-width: 120px;
+}</pre>
+        </div>
+      </div>
+    </div>
+
+    <div class="demo-card">
+      <h2>5. flex-grow on items</h2>
+      <p class="desc">Controls how much an individual item grows relative to others.</p>
+      <div class="controls">
+        <label>Item 1 flex-grow
+          <input type="number" id="fg-1" value="1" min="0" max="5" />
+        </label>
+        <label>Item 2 flex-grow
+          <input type="number" id="fg-2" value="1" min="0" max="5" />
+        </label>
+        <label>Item 3 flex-grow
+          <input type="number" id="fg-3" value="1" min="0" max="5" />
+        </label>
+      </div>
+      <div class="flex-container">
+        <div class="flex-item" id="fg-item-1" style="flex-grow: 1;">grow: 1</div>
+        <div class="flex-item" id="fg-item-2" style="flex-grow: 1;">grow: 1</div>
+        <div class="flex-item" id="fg-item-3" style="flex-grow: 1;">grow: 1</div>
+      </div>
+      <div class="code-group">
+        <div class="code-tabs">
+          <button class="code-tab active" data-target="fg-html">HTML</button>
+          <button class="code-tab" data-target="fg-css">CSS</button>
+        </div>
+        <div class="code-panel active" id="fg-html">
+          <pre class="code-block html">&lt;div class="flex-container"&gt;
+  &lt;div class="flex-item" style="flex-grow: 1;"&gt;grow: 1&lt;/div&gt;
+  &lt;div class="flex-item" style="flex-grow: 1;"&gt;grow: 1&lt;/div&gt;
+  &lt;div class="flex-item" style="flex-grow: 1;"&gt;grow: 1&lt;/div&gt;
+&lt;/div&gt;</pre>
+        </div>
+        <div class="code-panel" id="fg-css">
+          <pre class="code-block">.flex-container {
+  display: flex;
+}
+
+.flex-item {
+  flex-grow: 1;  /* each item takes equal share */
+}
+
+/* Try mixing: one item grow:2, others grow:1 */</pre>
+        </div>
+      </div>
+      <div class="tip">Tip: If one item has flex-grow: 2 and another has 1, the first gets twice as much of the leftover space.</div>
+    </div>
+
+  </section>
+
+  <!-- ============== GRID SECTION ============== -->
+  <section id="grid">
+
+    <div class="demo-card">
+      <h2>Starter Template — copy this into an .html file</h2>
+      <p class="desc">
+        Save this as <code>grid.html</code>, open it in your browser, and change the grid CSS
+        to see how the layout reacts.
+      </p>
+      <pre class="code-block html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+    .grid-container {
+      display: grid;                             /* turns on grid */
+      grid-template-columns: 1fr 1fr 1fr;        /* 3 equal columns */
+      gap: 10px;
+      padding: 15px;
+      border: 2px dashed #ec4899;
+      background: #fdf2f8;
+    }
+
+    .grid-item {
+      background: #ec4899;
+      color: white;
+      padding: 20px;
+      border-radius: 6px;
+      text-align: center;
+    }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+  &lt;div class="grid-container"&gt;
+    &lt;div class="grid-item"&gt;1&lt;/div&gt;
+    &lt;div class="grid-item"&gt;2&lt;/div&gt;
+    &lt;div class="grid-item"&gt;3&lt;/div&gt;
+    &lt;div class="grid-item"&gt;4&lt;/div&gt;
+    &lt;div class="grid-item"&gt;5&lt;/div&gt;
+    &lt;div class="grid-item"&gt;6&lt;/div&gt;
+  &lt;/div&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+      <div class="tip">
+        The <b>grid container</b> (parent) gets <code>display: grid</code> plus the column/row definitions.
+        Each direct child automatically becomes a cell. Try changing <code>grid-template-columns</code>
+        to <code>1fr 2fr</code>, <code>100px 1fr 100px</code>, or <code>repeat(4, 1fr)</code>.
+      </div>
+    </div>
+
+    <div class="demo-card">
+      <h2>1. grid-template-columns</h2>
+      <p class="desc">Defines the columns of the grid. Use fixed values (px), flexible units (fr), or functions like repeat() and minmax().</p>
+      <div class="controls">
+        <label>Column template
+          <select id="gc-cols">
+            <option value="1fr 1fr 1fr">1fr 1fr 1fr</option>
+            <option value="1fr 2fr 1fr">1fr 2fr 1fr</option>
+            <option value="100px 1fr 100px">100px 1fr 100px</option>
+            <option value="repeat(4, 1fr)">repeat(4, 1fr)</option>
+            <option value="repeat(auto-fit, minmax(120px, 1fr))">auto-fit + minmax</option>
+          </select>
+        </label>
+      </div>
+      <div class="grid-container" id="gc-container" style="grid-template-columns: 1fr 1fr 1fr;">
+        <div class="grid-item">1</div>
+        <div class="grid-item">2</div>
+        <div class="grid-item">3</div>
+        <div class="grid-item">4</div>
+        <div class="grid-item">5</div>
+        <div class="grid-item">6</div>
+      </div>
+      <div class="code-group">
+        <div class="code-tabs">
+          <button class="code-tab active" data-target="gc-html">HTML</button>
+          <button class="code-tab" data-target="gc-css">CSS</button>
+        </div>
+        <div class="code-panel active" id="gc-html">
+          <pre class="code-block html">&lt;div class="grid-container"&gt;
+  &lt;div class="grid-item"&gt;1&lt;/div&gt;
+  &lt;div class="grid-item"&gt;2&lt;/div&gt;
+  &lt;div class="grid-item"&gt;3&lt;/div&gt;
+  &lt;div class="grid-item"&gt;4&lt;/div&gt;
+  &lt;div class="grid-item"&gt;5&lt;/div&gt;
+  &lt;div class="grid-item"&gt;6&lt;/div&gt;
+&lt;/div&gt;</pre>
+        </div>
+        <div class="code-panel" id="gc-css">
+          <pre class="code-block" id="gc-code">.grid-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 10px;
+}
+
+.grid-item {
+  background: #ec4899;
+  color: white;
+  padding: 20px;
+}</pre>
+        </div>
+      </div>
+    </div>
+
+    <div class="demo-card">
+      <h2>2. gap (spacing)</h2>
+      <p class="desc">Sets the space between rows and columns. Can set row-gap and column-gap separately.</p>
+      <div class="controls">
+        <label>gap (px)
+          <input type="range" id="gap-range" min="0" max="40" value="10" />
+        </label>
+        <span id="gap-value" style="align-self: center;">10px</span>
+      </div>
+      <div class="grid-container" id="gap-container" style="grid-template-columns: repeat(3, 1fr);">
+        <div class="grid-item">A</div>
+        <div class="grid-item">B</div>
+        <div class="grid-item">C</div>
+        <div class="grid-item">D</div>
+        <div class="grid-item">E</div>
+        <div class="grid-item">F</div>
+      </div>
+      <div class="code-group">
+        <div class="code-tabs">
+          <button class="code-tab active" data-target="gap-html">HTML</button>
+          <button class="code-tab" data-target="gap-css">CSS</button>
+        </div>
+        <div class="code-panel active" id="gap-html">
+          <pre class="code-block html">&lt;div class="grid-container"&gt;
+  &lt;div class="grid-item"&gt;A&lt;/div&gt;
+  &lt;div class="grid-item"&gt;B&lt;/div&gt;
+  &lt;div class="grid-item"&gt;C&lt;/div&gt;
+  &lt;div class="grid-item"&gt;D&lt;/div&gt;
+  &lt;div class="grid-item"&gt;E&lt;/div&gt;
+  &lt;div class="grid-item"&gt;F&lt;/div&gt;
+&lt;/div&gt;</pre>
+        </div>
+        <div class="code-panel" id="gap-css">
+          <pre class="code-block" id="gap-code">.grid-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  /* Or: row-gap: 10px; column-gap: 20px; */
+}</pre>
+        </div>
+      </div>
+    </div>
+
+    <div class="demo-card">
+      <h2>3. Spanning cells with grid-column / grid-row</h2>
+      <p class="desc">Any item can span multiple columns or rows using grid-column: span N or explicit line numbers.</p>
+      <div class="grid-container" style="grid-template-columns: repeat(4, 1fr); grid-auto-rows: 80px;">
+        <div class="grid-item" style="grid-column: span 2;">span 2 cols</div>
+        <div class="grid-item">1 col</div>
+        <div class="grid-item" style="grid-row: span 2;">span 2 rows</div>
+        <div class="grid-item">normal</div>
+        <div class="grid-item" style="grid-column: span 2;">span 2 cols</div>
+      </div>
+      <div class="code-group">
+        <div class="code-tabs">
+          <button class="code-tab active" data-target="span-html">HTML</button>
+          <button class="code-tab" data-target="span-css">CSS</button>
+        </div>
+        <div class="code-panel active" id="span-html">
+          <pre class="code-block html">&lt;div class="grid-container"&gt;
+  &lt;div class="grid-item wide"&gt;span 2 cols&lt;/div&gt;
+  &lt;div class="grid-item"&gt;1 col&lt;/div&gt;
+  &lt;div class="grid-item tall"&gt;span 2 rows&lt;/div&gt;
+  &lt;div class="grid-item"&gt;normal&lt;/div&gt;
+  &lt;div class="grid-item wide"&gt;span 2 cols&lt;/div&gt;
+&lt;/div&gt;</pre>
+        </div>
+        <div class="code-panel" id="span-css">
+          <pre class="code-block">.grid-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: 80px;
+  gap: 10px;
+}
+
+.wide { grid-column: span 2; }
+.tall { grid-row: span 2; }
+
+/* Explicit lines also work:
+   grid-column: 1 / 3;  (from line 1 to line 3) */</pre>
+        </div>
+      </div>
+    </div>
+
+    <div class="demo-card">
+      <h2>4. Named grid-template-areas (full page layout)</h2>
+      <p class="desc">Name regions of the grid with strings and assign elements to them. Perfect for page layouts.</p>
+      <div class="grid-container layout-grid">
+        <div class="grid-item grid-named-item header-area">Header</div>
+        <div class="grid-item grid-named-item sidebar-area">Sidebar</div>
+        <div class="grid-item grid-named-item main-area">Main</div>
+        <div class="grid-item grid-named-item footer-area">Footer</div>
+      </div>
+      <div class="code-group">
+        <div class="code-tabs">
+          <button class="code-tab active" data-target="areas-html">HTML</button>
+          <button class="code-tab" data-target="areas-css">CSS</button>
+        </div>
+        <div class="code-panel active" id="areas-html">
+          <pre class="code-block html">&lt;div class="page"&gt;
+  &lt;div class="header"&gt;Header&lt;/div&gt;
+  &lt;div class="sidebar"&gt;Sidebar&lt;/div&gt;
+  &lt;div class="main"&gt;Main&lt;/div&gt;
+  &lt;div class="footer"&gt;Footer&lt;/div&gt;
+&lt;/div&gt;</pre>
+        </div>
+        <div class="code-panel" id="areas-css">
+          <pre class="code-block">.page {
+  display: grid;
+  grid-template-areas:
+    "header  header  header"
+    "sidebar main    main"
+    "footer  footer  footer";
+  grid-template-columns: 1fr 2fr 1fr;
+  grid-template-rows: 60px 200px 60px;
+  gap: 10px;
+}
+
+.header  { grid-area: header; }
+.sidebar { grid-area: sidebar; }
+.main    { grid-area: main; }
+.footer  { grid-area: footer; }</pre>
+        </div>
+      </div>
+    </div>
+
+    <div class="demo-card">
+      <h2>5. Responsive gallery with auto-fit</h2>
+      <p class="desc">Resize your browser window — this grid automatically fits as many columns as possible, each at least 200px wide.</p>
+      <div class="card-gallery">
+        <div class="gallery-card">Card 1</div>
+        <div class="gallery-card">Card 2</div>
+        <div class="gallery-card">Card 3</div>
+        <div class="gallery-card">Card 4</div>
+        <div class="gallery-card">Card 5</div>
+        <div class="gallery-card">Card 6</div>
+      </div>
+      <div class="code-group">
+        <div class="code-tabs">
+          <button class="code-tab active" data-target="gallery-html">HTML</button>
+          <button class="code-tab" data-target="gallery-css">CSS</button>
+        </div>
+        <div class="code-panel active" id="gallery-html">
+          <pre class="code-block html">&lt;div class="gallery"&gt;
+  &lt;div class="card"&gt;Card 1&lt;/div&gt;
+  &lt;div class="card"&gt;Card 2&lt;/div&gt;
+  &lt;div class="card"&gt;Card 3&lt;/div&gt;
+  &lt;div class="card"&gt;Card 4&lt;/div&gt;
+  &lt;div class="card"&gt;Card 5&lt;/div&gt;
+  &lt;div class="card"&gt;Card 6&lt;/div&gt;
+&lt;/div&gt;</pre>
+        </div>
+        <div class="code-panel" id="gallery-css">
+          <pre class="code-block">.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 15px;
+}
+
+.card {
+  background: #6366f1;
+  color: white;
+  padding: 30px;
+  border-radius: 8px;
+  text-align: center;
+}</pre>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ============== COMPARE SECTION ============== -->
+  <section id="compare">
+
+    <div class="demo-card">
+      <h2>When to use Flexbox vs Grid</h2>
+
+      <h3>Flexbox — one-dimensional layouts</h3>
+      <p class="desc">
+        Use when you're arranging items in a single row OR a single column. Great for navbars, toolbars,
+        centering content, and distributing space between items on one axis.
+      </p>
+      <div class="flex-container" style="justify-content: space-between; align-items: center;">
+        <div class="flex-item">Logo</div>
+        <div class="flex-item">Home</div>
+        <div class="flex-item">About</div>
+        <div class="flex-item">Contact</div>
+      </div>
+      <div class="code-group">
+        <div class="code-tabs">
+          <button class="code-tab active" data-target="nav-html">HTML</button>
+          <button class="code-tab" data-target="nav-css">CSS</button>
+        </div>
+        <div class="code-panel active" id="nav-html">
+          <pre class="code-block html">&lt;nav class="navbar"&gt;
+  &lt;div class="logo"&gt;Logo&lt;/div&gt;
+  &lt;a href="#"&gt;Home&lt;/a&gt;
+  &lt;a href="#"&gt;About&lt;/a&gt;
+  &lt;a href="#"&gt;Contact&lt;/a&gt;
+&lt;/nav&gt;</pre>
+        </div>
+        <div class="code-panel" id="nav-css">
+          <pre class="code-block">/* Classic navbar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+}</pre>
+        </div>
+      </div>
+
+      <h3>Grid — two-dimensional layouts</h3>
+      <p class="desc">
+        Use when you need rows AND columns to align. Grid excels at full-page layouts, image galleries,
+        dashboards, and any design where both axes matter.
+      </p>
+      <div class="grid-container layout-grid">
+        <div class="grid-item grid-named-item header-area">Header</div>
+        <div class="grid-item grid-named-item sidebar-area">Sidebar</div>
+        <div class="grid-item grid-named-item main-area">Main</div>
+        <div class="grid-item grid-named-item footer-area">Footer</div>
+      </div>
+
+      <h3>Quick Rules of Thumb</h3>
+      <div class="tip">
+        If you're thinking about one row or one column → reach for <b>flex</b>.<br>
+        If you're thinking about the page as a whole, with rows AND columns aligning → reach for <b>grid</b>.<br>
+        They compose beautifully: a grid cell can use flex inside it, and vice versa.
+      </div>
+
+      <h3>Side-by-side comparison</h3>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+        <div>
+          <h3 style="color: #a5b4fc;">Flexbox</h3>
+          <ul style="color: #b0b0c0; line-height: 1.8;">
+            <li>1D layout (row or column)</li>
+            <li>Content-first</li>
+            <li>Items size based on content</li>
+            <li>Great for components</li>
+            <li>Best for: navbars, cards, buttons</li>
+          </ul>
+        </div>
+        <div>
+          <h3 style="color: #f9a8d4;">Grid</h3>
+          <ul style="color: #b0b0c0; line-height: 1.8;">
+            <li>2D layout (rows + columns)</li>
+            <li>Layout-first</li>
+            <li>Define the structure up front</li>
+            <li>Great for page layouts</li>
+            <li>Best for: dashboards, galleries, full pages</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+</main>
+
+<footer>
+  Interactive Flex & Grid Demo — open your browser's DevTools to inspect the elements and see the CSS in action.
+</footer>
+
+<script>
+  // ---------- Top-level section tab switching ----------
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById(btn.dataset.tab).classList.add('active');
+    });
+  });
+
+  // ---------- HTML/CSS code tab switching inside each example ----------
+  document.querySelectorAll('.code-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      const group = tab.closest('.code-group');
+      group.querySelectorAll('.code-tab').forEach(t => t.classList.remove('active'));
+      group.querySelectorAll('.code-panel').forEach(p => p.classList.remove('active'));
+      tab.classList.add('active');
+      document.getElementById(tab.dataset.target).classList.add('active');
+    });
+  });
+
+  // ---------- flex-direction ----------
+  const fdSelect = document.getElementById('fd-direction');
+  const fdContainer = document.getElementById('fd-container');
+  const fdCode = document.getElementById('fd-code');
+  fdSelect.addEventListener('change', () => {
+    fdContainer.style.flexDirection = fdSelect.value;
+    fdCode.textContent = `display: flex;\nflex-direction: ${fdSelect.value};`;
+  });
+
+  // ---------- justify-content ----------
+  const jcSelect = document.getElementById('jc-justify');
+  const jcContainer = document.getElementById('jc-container');
+  const jcCode = document.getElementById('jc-code');
+  jcSelect.addEventListener('change', () => {
+    jcContainer.style.justifyContent = jcSelect.value;
+    jcCode.textContent = `display: flex;\njustify-content: ${jcSelect.value};`;
+  });
+
+  // ---------- align-items ----------
+  const aiSelect = document.getElementById('ai-align');
+  const aiContainer = document.getElementById('ai-container');
+  const aiCode = document.getElementById('ai-code');
+  aiSelect.addEventListener('change', () => {
+    aiContainer.style.alignItems = aiSelect.value;
+    aiCode.textContent = `display: flex;\nalign-items: ${aiSelect.value};`;
+  });
+
+  // ---------- flex-wrap ----------
+  const fwSelect = document.getElementById('fw-wrap');
+  const fwContainer = document.getElementById('fw-container');
+  const fwCode = document.getElementById('fw-code');
+  fwSelect.addEventListener('change', () => {
+    fwContainer.style.flexWrap = fwSelect.value;
+    fwCode.textContent = `display: flex;\nflex-wrap: ${fwSelect.value};`;
+  });
+
+  // ---------- flex-grow ----------
+  [1, 2, 3].forEach(i => {
+    const input = document.getElementById('fg-' + i);
+    const item = document.getElementById('fg-item-' + i);
+    input.addEventListener('input', () => {
+      item.style.flexGrow = input.value;
+      item.textContent = 'grow: ' + input.value;
+    });
+  });
+
+  // ---------- grid-template-columns ----------
+  const gcSelect = document.getElementById('gc-cols');
+  const gcContainer = document.getElementById('gc-container');
+  const gcCode = document.getElementById('gc-code');
+  gcSelect.addEventListener('change', () => {
+    gcContainer.style.gridTemplateColumns = gcSelect.value;
+    gcCode.textContent = `display: grid;\ngrid-template-columns: ${gcSelect.value};\ngap: 10px;`;
+  });
+
+  // ---------- gap ----------
+  const gapRange = document.getElementById('gap-range');
+  const gapValue = document.getElementById('gap-value');
+  const gapContainer = document.getElementById('gap-container');
+  const gapCode = document.getElementById('gap-code');
+  gapRange.addEventListener('input', () => {
+    gapContainer.style.gap = gapRange.value + 'px';
+    gapValue.textContent = gapRange.value + 'px';
+    gapCode.textContent = `display: grid;\ngrid-template-columns: repeat(3, 1fr);\ngap: ${gapRange.value}px;`;
+  });
+</script>
+
+</body>
+</html>

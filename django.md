@@ -72,3 +72,11 @@ after activating you will get the virtual environment name before the folder pat
 ## Create our firts webpage
 
 ### Step1 : 
+
+
+
+### CSS - Cascading style Sheets
+
+- It will tell the HTML how to disply on the screen 
+
+- inline css 

@@ -1,0 +1,103 @@
+body{
+    background-color: #EBF4F6;
+}
+
+.head-style
+        {
+            color: #9f1f1f;
+            background-color: antiquewhite;
+            border-style: solid;
+            border-color: rgb(195, 56, 56);
+            border-radius: 25px;
+            margin: 100px 50px 25px 10px ;
+            padding: 10px 5px  2px 0px;
+            text-align: center;
+            font-family: Georgia, 'Times New Roman', Times, serif;
+            /*  margin : Top,bottom   left,right;
+            margin  : Top right bottom left; */
+        }
+
+        .exp-class
+        {
+            color: aqua;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+
+        h1, h2, .exp-class
+        {
+            color: blueviolet;
+        }
+
+        /*Display*/
+
+        .table-class 
+        {
+            width: 100%;
+            text-align: center;
+            border-collapse: collapse ;
+            
+        }
+
+        .table-class td ,.table-class th
+        {
+            padding: 20px;
+        }
+/* dISPLAY */
+        .certifications
+        {
+           display:flex;
+           flex-direction: row;
+           
+        }
+
+        .produc-section
+        {
+            background-color: #ffffff;
+            padding: 40px;
+            
+        }
+        .info-card-main
+        {
+            display: flex;
+        }
+        
+        .info-card
+        {
+            color: #ffffff;
+            background-color: #8100D1;
+            padding: 30px;
+            margin: 10px;
+            border-radius: 24px;
+            flex-grow: 1;
+            width: 50%;
+        }
+
+        
+
+        .flex-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.flex-item {
+  background: #6366f1;
+  color: white;
+  padding: 20px;
+ 
+}
+
+.grid-container
+{
+    display: grid;
+     grid-template-columns: 1fr 1fr 1fr 1fr  ;
+     gap: 10px;
+     margin: 10px;
+}
+
+.grid-item {
+  background: #ec4899;
+  color: white;
+  padding: 20px;
+  border-radius: 10px;
+}
